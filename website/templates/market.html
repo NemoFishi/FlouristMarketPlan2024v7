@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}Market{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="text-center mb-5">
+        <h1 class="text-black">Wedding Flowers - Collections</h1>
+        <p class="text-muted">Handcrafted collections of DIY wedding flowers. Choose your favorite to get started.</p>
+    </div>
+    <div class="row" style="padding-top: 20px">
+        {% for item in items %}
+        <div class="col-lg-6 col-md-12 mb-4">
+            <div class="card shadow-lg h-100">
+                <img src="{{ url_for('static', filename=item.image or 'images/placeholder.jpg') }}" class="card-img-top" alt="{{ item.name }}" style="height: 300px; object-fit: cover;">
+                <div class="card-body bg-cream">
+                    <h5 class="card-title text-gold">{{ item.name }}</h5>
+                    <p class="card-text text-muted">${{ "%.2f" | format(item.price) }}</p>
+                    <form class="add-to-cart-form" data-item-id="{{ item.id }}">
+                        <div class="input-group mb-2">
+                            <span class="input-group-text">Qty</span>
+                            <input type="number" name="quantity" value="1" min="1" class="form-control">
+                            <button type="submit" class="btn btn-gold">Add to Cart</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .bg-ivory {
+        background-color: #f9f6f2;
+    }
+    .bg-cream {
+        background-color: #fffaf0;
+    }
+    .text-gold {
+        color: #d4af37;
+    }
+    .btn-gold {
+        background-color: #d4af37;
+        color: white;
+    }
+    .btn-gold:hover {
+        background-color: #c09d31;
+        color: white;
+    }
+    .card-img-top {
+        transition: transform 0.5s ease;
+    }
+
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const forms = document.querySelectorAll(".add-to-cart-form");
+    forms.forEach(form => {
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            const itemId = this.getAttribute("data-item-id");
+            const quantity = this.querySelector("input[name='quantity']").value;
+            fetch(`/add-to-cart/${itemId}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: `quantity=${quantity}`
+            }).then(response => response.json())
+              .then(data => {
+                  alert(data.message);
+              }).catch(error => {
+                  console.error("Error adding item to cart:", error);
+              });
+        });
+    });
+});
+</script>
+{% endblock %}

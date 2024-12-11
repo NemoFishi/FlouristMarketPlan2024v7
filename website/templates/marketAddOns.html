@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}Market Add-Ons{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="text-center mb-5">
+        <h1 class="text-black">Wedding Flowers - Add Ons</h1>
+        <p class="text-muted">Enhance your special day with our handcrafted wedding flower add-ons. Select your favorites to complement your main arrangements.</p>
+    </div>
+    <div class="row" style="padding-top: 20px">
+        {% for item in addon_items %}
+        <div class="col-lg-6 col-md-12 mb-4">
+            <div class="card shadow-lg h-100">
+                <!-- Placeholder for add-on product images -->
+                <img src="{{ url_for('static', filename=item.image or 'images/placeholder.jpg') }}" class="card-img-top" alt="{{ item.name }}" style="height: 300px; object-fit: cover;">
+                <div class="card-body bg-cream">
+                    <h5 class="card-title text-gold">{{ item.name }}</h5>
+                    <p class="card-text text-muted">${{ "%.2f" | format(item.price) }}</p>
+                    <div class="input-group mb-2">
+                        <span class="input-group-text">Qty</span>
+                        <input type="number" id="quantity-{{ item.id }}" value="1" min="1" class="form-control">
+                        <button type="button" class="btn btn-gold" onclick="addToCart({{ item.id }})">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .bg-ivory {
+        background-color: #f9f6f2;
+    }
+    .bg-cream {
+        background-color: #fffaf0;
+    }
+    .text-gold {
+        color: #d4af37;
+    }
+    .btn-gold {
+        background-color: #d4af37;
+        color: white;
+    }
+    .btn-gold:hover {
+        background-color: #c09d31;
+        color: white;
+    }
+    .card-img-top {
+        width: 100%;
+    }
+</style>
+
+<script>
+function addToCart(itemId) {
+    const quantity = document.getElementById(`quantity-${itemId}`).value;
+    fetch(`/add-to-cart/${itemId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({
+            'quantity': quantity
+        })
+    }).then(response => response.json())
+      .then(data => {
+          if (data.message === "Item added to cart") {
+              alert(data.message);  // Provide user feedback
+          } else {
+              alert("Error adding item to cart");
+          }
+      }).catch(error => {
+          console.error("Error:", error);
+      });
+}
+</script>
+{% endblock %}

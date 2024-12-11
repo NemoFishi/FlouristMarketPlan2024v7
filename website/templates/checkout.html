@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block title %}Checkout{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Checkout</h1>
+    {% if cart_items %}
+        <form id="checkout-form" action="{{ url_for('views.process_checkout') }}" method="POST">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Price</th>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart_items %}
+                    <tr>
+                        <td>${{ "%.2f" | format(item.item_price or item.get('price', 0)) }}</td>
+                        <td>{{ item.item_name or item.name or item.get('name', '') }}</td>
+                        <td>{{ item.quantity or item.get('quantity', 0) }}</td>
+                        <td>${{ "%.2f" | format((item.item_price or item.get('price', 0)) * (item.quantity or item.get('quantity', 0))) }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="mt-3">
+                <p class="font-weight-bold">Total: $<span id="total-price">{{ "%.2f" | format(total_price) }}</span></p>
+            </div>
+
+            <!-- PayPal Button -->
+            <div id="paypal-button-container" class="mb-3"></div>
+
+            <input type="hidden" id="total-amount" name="total_amount" value="{{ total_price }}">
+            <input type="hidden" id="time-zone" name="time_zone">
+
+        </form>
+    {% else %}
+        <p class="text-center">Your cart is empty.</p>
+    {% endif %}
+</div>
+
+<script src="https://www.paypal.com/sdk/js?client-id={{ paypal_client_id }}&currency=USD"></script>
+<script>
+paypal.Buttons({
+    createOrder: function(data, actions) {
+        const totalAmount = parseFloat(document.getElementById('total-amount').value).toFixed(2);
+        const items = [
+            {% for item in cart_items %}
+            {
+                name: "{{ item.item_name or item.name or item.get('name', '') }}",
+                description: "{{ item.item_name or item.name or item.get('name', '') }}",
+                quantity: {{ item.quantity or item.get('quantity', 0) }},
+                unit_amount: {
+                    currency_code: 'USD',
+                    value: parseFloat("{{ "%.2f" | format(item.item_price or item.get('price', 0)) }}").toFixed(2)
+                }
+            },
+            {% endfor %}
+        ];
+
+        return actions.order.create({
+            purchase_units: [{
+                amount: {
+                    currency_code: 'USD',
+                    value: totalAmount,
+                    breakdown: {
+                        item_total: {
+                            currency_code: 'USD',
+                            value: totalAmount
+                        }
+                    }
+                },
+                items: items,
+                payer: {
+                    email_address: "{{ user.email }}"
+                }
+            }]
+        });
+    },
+    onApprove: function(data, actions) {
+        // Capture user's time zone
+        document.getElementById('time-zone').value = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+        return actions.order.capture().then(function(details) {
+            alert('Transaction completed by ' + details.payer.name.given_name);
+            document.getElementById('checkout-form').submit();
+        });
+    },
+    onError: function(err) {
+        console.error('PayPal error:', err);  // Debugging line
+        alert('An error occurred with PayPal: ' + err.message);
+    }
+}).render('#paypal-button-container');
+</script>
+
+{% endblock %}

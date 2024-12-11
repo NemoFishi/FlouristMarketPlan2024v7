@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Ticket Details{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h2>Ticket Details</h2>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        <li class="list-group-item"><strong>Bride:</strong> {{ ticket.brideName }}</li>
+                        <li class="list-group-item"><strong>Groom:</strong> {{ ticket.groomName }}</li>
+                        <li class="list-group-item"><strong>Bride Address:</strong> {{ ticket.brideAddress }}</li>
+                        <li class="list-group-item"><strong>Groom Address:</strong> {{ ticket.groomAddress }}</li>
+                        <li class="list-group-item"><strong>Bride Phone:</strong> {{ ticket.bridePhone }}</li>
+                        <li class="list-group-item"><strong>Groom Phone:</strong> {{ ticket.groomPhone }}</li>
+                        <li class="list-group-item"><strong>Ceremony Location:</strong> {{ ticket.ceremonyLocation }}</li>
+                        <li class="list-group-item"><strong>Ceremony Date:</strong> {{ ticket.ceremonyDate }}</li>
+                        <li class="list-group-item"><strong>Ceremony Time:</strong> {{ ticket.ceremonyTime }}</li>
+                        <li class="list-group-item"><strong>Reception Location:</strong> {{ ticket.receptionLocation }}</li>
+                        <li class="list-group-item"><strong>Reception Date:</strong> {{ ticket.receptionDate }}</li>
+                        <li class="list-group-item"><strong>Reception Time:</strong> {{ ticket.receptionTime }}</li>
+                        <li class="list-group-item"><strong>Dress Color and Style:</strong> {{ ticket.dressColorStyle }}</li>
+                        <li class="list-group-item"><strong>Bouquets:</strong> {{ ticket.bouquets }}</li>
+                        <li class="list-group-item"><strong>Boutonnieres:</strong> {{ ticket.boutonnieres }}</li>
+                        <li class="list-group-item"><strong>Parents:</strong> {{ ticket.parents }}</li>
+                        <li class="list-group-item"><strong>Corsages:</strong> {{ ticket.corsages }}</li>
+                        <li class="list-group-item"><strong>Ceremony Decorations:</strong> {{ ticket.ceremonyDecor }}</li>
+                        <li class="list-group-item"><strong>Reception Decorations:</strong> {{ ticket.receptionDecor }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

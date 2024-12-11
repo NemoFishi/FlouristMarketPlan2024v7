@@ -1,0 +1,233 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block content %}
+    <body class="p-0 m-0 border-0 bd-example">
+
+    <!-- Carousel Section -->
+    <div id="carouselIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{{ url_for('static', filename='images/bouguetNine.jpg') }}"
+                     class="d-block w-100 carousel-format img-fluid" alt="First slide">
+                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                    <h3>DIY Wedding Flowers</h3>
+                    <p>Cut your wedding flower costs in half</p>
+                    <a href="/market" class="btn btn-darkgold btn-darkGoldRod">SHOP THE WEDDING FLOWER COLLECTION</a>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="{{ url_for('static', filename='images/bouguetOne.jpg') }}"
+                     class="d-block w-100 carousel-format img-fluid" alt="Second slide">
+                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                    <h3>DIY Wedding Flowers</h3>
+                    <p>Customize to your heart's content</p>
+                    <a href="/marketAddOns" class="btn btn-darkgold btn-darkGoldRod">SHOP THE WEDDING FLOWERS ADDONS</a>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="{{ url_for('static', filename='images/bouguetSix.jpg') }}"
+                     class="d-block w-100 carousel-format img-fluid" alt="Third slide">
+                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                    <h3>DIY Wedding Flowers</h3>
+                    <p>Build your own Wedding</p>
+                    <a href="/wedding-form" class="btn btn-darkgold btn-darkGoldRod">CUSTOMIZE YOUR WEDDING</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselIndicators" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselIndicators" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselIndicators" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <!-- Personal Touch Section -->
+    <div class="container my-5">
+        <div class="row align-items-center mb-5 mt-3">
+            <div class="col-md-6 order-md-2">
+                <a class="d-block">
+                    <img src="{{ url_for('static', filename='images/weddingStageOne.jpeg') }}"
+                         class="img-fluid personal-touch-format">
+                </a>
+            </div>
+            <div class="col-md-6">
+                <div class="p-3">
+                    <h4 class="text-muted">A Personal Touch for Every Wedding.</h4>
+                    <h2 class="mb-3">Create Beautiful Moments with Ease.</h2>
+                    <p>Vi's Flowers offers affordable, pre-designed DIY wedding flower packages. Choose a collection,
+                        and our family-owned, in-house team will ship all the flowers you need, straight to your
+                        door.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Featured Products Banner -->
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12 text-center" style="margin: 30px;">
+                <h2 class="text-gold">Featured Products</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Featured Products Section -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 mb-4 position-relative">
+                <a href="/market">
+                    <div class="card bg-dark text-white border-0">
+                        <img src="{{ url_for('static', filename='images/bouquetSeven.jpg') }}"
+                             class="card-img featured-image-format img-fluid" alt="vintage charm collection">
+                        <div class="card-img-overlay d-flex align-items-end justify-content-left p-0 overlay">
+                            <h5 class="card-title text-gold p-3 m-0">Vintage Charm Collection</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6 mb-4 position-relative">
+                <a href="/market">
+                    <div class="card bg-dark text-white border-0">
+                        <img src="{{ url_for('static', filename='images/bouguetEight.jpg') }}"
+                             class="card-img featured-image-format img-fluid" alt="rustic romance collection">
+                        <div class="card-img-overlay d-flex align-items-end justify-content-left p-0 overlay">
+                            <h5 class="card-title text-gold p-3 m-0">Rustic Romance Collection</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6 mb-4 position-relative">
+                <a href="/marketAddOns">
+                    <div class="card bg-dark text-white border-0">
+                        <img src="{{ url_for('static', filename='images/bridal_banquet.jpg') }}"
+                             class="card-img featured-image-format img-fluid" alt="Bridal Banquet">
+                        <div class="card-img-overlay d-flex align-items-end justify-content-left p-0 overlay">
+                            <h5 class="card-title text-gold p-3 m-0">Bridal Banquet</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6 mb-4 position-relative">
+                <a href="/marketAddOns">
+                    <div class="card bg-dark text-white border-0">
+                        <img src="{{ url_for('static', filename='images/aisle_runner_flowers.jpg') }}"
+                             class="card-img featured-image-format img-fluid" alt="Aisle runner flowers">
+                        <div class="card-img-overlay d-flex align-items-end justify-content-left p-0 overlay">
+                            <h5 class="card-title text-gold p-3 m-0">Aisle Runner Flowers</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6 mb-4 position-relative">
+                <a href="/marketAddOns">
+                    <div class="card bg-dark text-white border-0">
+                        <img src="{{ url_for('static', filename='images/corsage_two.jpg') }}"
+                             class="card-img featured-image-format img-fluid" alt="corsage two">
+                        <div class="card-img-overlay d-flex align-items-end justify-content-left p-0 overlay">
+                            <h5 class="card-title text-gold p-3 m-0">Corsage Two</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6 mb-4 position-relative">
+                <a href="/market">
+                    <div class="card bg-dark text-white border-0">
+                        <img src="{{ url_for('static', filename='images/bohemeian_bliss_collection.jpg') }}"
+                             class="card-img featured-image-format img-fluid" alt="bohemian bliss collection">
+                        <div class="card-img-overlay d-flex align-items-end justify-content-left p-0 overlay">
+                            <h5 class="card-title text-gold p-3 m-0">Bohemian Bliss Collection</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    </body>
+
+    <style>
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .carousel-caption {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+        }
+
+        .btn-darkGoldRod:hover {
+            background-color: darkgoldenrod;
+            color: white;
+        }
+
+        .btn-darkgold {
+            background-color: goldenrod;
+            color: white;
+        }
+
+        .carousel-format {
+            height: 65vh;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .featured-image-format {
+            max-height: 600px;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        .personal-touch-format {
+            height: 50vh;
+            object-fit: cover;
+            object-position: center;
+            padding-bottom: 50px;
+            padding-top: 50px;
+        }
+
+        /* Ensure images are responsive and adjust layout */
+        @media (max-width: 768px) {
+            .carousel-format {
+                height: 40vh;
+            }
+
+            .personal-touch-format {
+                height: auto;
+            }
+
+            .featured-image-format {
+                max-height: 300px;
+            }
+
+            .card-title {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+
+
+{% endblock %}
+
+
+

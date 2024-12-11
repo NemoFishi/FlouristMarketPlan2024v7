@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}Sign Up{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h2>Sign Up</h2>
+                </div>
+                <div class="card-body">
+                    <!-- Flash messages to display errors -->
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="alert alert-danger">
+                            <ul>
+                                {% for category, message in messages %}
+                                    {% if category == 'error' %}
+                                        <li>{{ message }}</li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                    {% endwith %}
+                    <form method="post" action="{{ url_for('auth.sign_up') }}">
+                        <div class="form-group mb-3">
+                            <label for="first_name" class="form-label">First Name</label>
+                            <input type="text" class="form-control" id="first_name" name="first_name" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="last_name" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" id="last_name" name="last_name" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-grey bg-lavender w-100">Sign Up</button>
+                    </form>
+                    <div class="mt-4">
+                        <h5>User Requirements:</h5>
+                        <ul>
+                            <li>Name: Alphanumeric, 3-15 characters long.</li>
+                            <li>Username: Alphanumeric and underscore, 4-20 characters long.</li>
+                            <li>Password: 8-20 characters long, including at least one lowercase letter, one uppercase letter, and one digit.</li>
+                            <li>Input should not contain harmful keywords like SELECT, DROP, or DELETE.</li>
+                            <li>Email: Should be in a valid email format and not already exist in the database.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .bg-lavender {
+        background-color: lavender;
+    }
+    .btn-grey:hover {
+        background-color: grey;
+        color: white;
+    }
+</style>
+{% endblock %}

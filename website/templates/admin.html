@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Admin Dashboard</h1>
+
+    <div class="row">
+        <!-- Orders Section -->
+        <div class="col-md-6">
+            <h2>All Orders</h2>
+            {% if all_orders %}
+                {% for all_order in all_orders %}
+                <div class="card mb-3 shadow-sm" style="transition: transform 0.2s;">
+                    <div class="card-body">
+                        <h5 class="card-title">Order ID: {{ all_order.id }}</h5>
+                        <p class="card-text">Customer Name: {{ all_order.customer_name }}</p>
+                        <p class="card-text">Date Ordered: {{ all_order.date_ordered.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+                        <p class="card-text">Total Amount: ${{ "%.2f" | format(all_order.total_amount) }}</p>
+                        <h6>Items:</h6>
+                        <ul class="list-group list-group-flush">
+                            {% for item in all_order.order_items %}
+                            <li class="list-group-item">
+                                {{ item.product_name }} - ${{ "%.2f" | format(item.product_price) }} x {{ item.quantity }} = ${{ "%.2f" | format(item.total_price) }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>No incoming orders found.</p>
+            {% endif %}
+        </div>
+
+        <!-- Custom Wedding Requests Section -->
+        <div class="col-md-6">
+            <h2>Custom Wedding Requests</h2>
+            <div class="accordion" id="weddingRequests">
+                {% for request in wedding_requests %}
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading{{ request.id }}">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ request.id }}" aria-expanded="true" aria-controls="collapse{{ request.id }}">
+                            {{ request.bride_name }} & {{ request.groom_name }} - {{ request.ceremony_date }}
+                        </button>
+                    </h2>
+                    <div id="collapse{{ request.id }}" class="accordion-collapse collapse" aria-labelledby="heading{{ request.id }}" data-bs-parent="#weddingRequests">
+                        <div class="accordion-body">
+                            <p><strong>Bride:</strong> {{ request.bride_name }}</p>
+                            <p><strong>Groom:</strong> {{ request.groom_name }}</p>
+                            <p><strong>Email:</strong> {{ request.email }}</p>
+                            <p><strong>Bride Address:</strong> {{ request.bride_address }}</p>
+                            <p><strong>Groom Address:</strong> {{ request.groom_address }}</p>
+                            <p><strong>Bride Phone:</strong> {{ request.bride_phone }}</p>
+                            <p><strong>Groom Phone:</strong> {{ request.groom_phone }}</p>
+                            <p><strong>Ceremony Location:</strong> {{ request.ceremony_location }}</p>
+                            <p><strong>Ceremony Date:</strong> {{ request.ceremony_date }}</p>
+                            <p><strong>Ceremony Time:</strong> {{ request.ceremony_time }}</p>
+                            <p><strong>Reception Location:</strong> {{ request.reception_location }}</p>
+                            <p><strong>Reception Date:</strong> {{ request.reception_date }}</p>
+                            <p><strong>Reception Time:</strong> {{ request.reception_time }}</p>
+                            <p><strong>Dress Color and Style:</strong> {{ request.dress_color_style }}</p>
+
+                            <h4>Wedding Party</h4>
+                            <p><strong>Bouquets:</strong> {{ request.bouquets }}</p>
+                            <p><strong>Boutonnieres:</strong> {{ request.boutonnieres }}</p>
+                            <p><strong>Parents:</strong> {{ request.parents }}</p>
+                            <p><strong>Corsages:</strong> {{ request.corsages }}</p>
+
+                            <h4>Ceremony</h4>
+                            <p><strong>Decorations:</strong> {{ request.ceremony_decor }}</p>
+
+                            <h4>Reception</h4>
+                            <p><strong>Decorations:</strong> {{ request.reception_decor }}</p>
+
+                            <a href="mailto:{{ request.email }}" class="btn btn-dark" data-bs-toggle="tooltip" data-bs-placement="top" title="Contact User"><i class="bi bi-envelope"></i> Contact User</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    });
+</script>
+{% endblock %}

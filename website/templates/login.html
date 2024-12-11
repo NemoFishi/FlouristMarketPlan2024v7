@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h2>Login</h2>
+                </div>
+                <div class="card-body">
+                    <form action="{{ url_for('auth.login') }}" method="POST">
+                        <div class="form-group mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <button type="submit" class="btn bg-lavender btn-grey w-100 mb-3">Login</button>
+                        <div class="text-center">
+                            <a href="{{ url_for('auth.sign_up') }}" class="btn btn-link ">Create Account</a>
+                        </div>
+                    </form>
+                    {% if error %}
+                    <div class="alert alert-danger mt-3">
+                        {{ error }}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .bg-lavender {
+        background-color: lavender;
+    }
+    .btn-grey:hover {
+        background-color: grey;
+        color: white;
+    }
+    .btn-link:hover {
+        color: grey;
+    }
+</style>
+{% endblock %}

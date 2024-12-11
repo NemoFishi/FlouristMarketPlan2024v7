@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Form Submitted{% endblock %}
+
+{% block content %}
+<div class="container mt-5 text-center">
+    <h1>Form submitted by {{ first_name }} {{ last_name }}!</h1>
+    <p>Redirecting to the homepage...</p>
+</div>
+<script>
+    setTimeout(function() {
+        window.location.href = "{{ url_for('views.home') }}";
+    }, 3000);  // 3000 milliseconds = 3 seconds
+</script>
+{% endblock %}

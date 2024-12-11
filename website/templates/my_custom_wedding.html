@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}Your Custom Wedding Details{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card shadow-lg">
+                <div class="card-header text-center text-black" style="background-color: lavender">
+                    <h2>Your Custom Wedding Details</h2>
+                    <p class="mb-0">Here’s what you’ve planned…</p>
+                </div>
+                <div class="card-body bg-cream">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <strong>Bride:</strong> {{ brideName }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <strong>Groom:</strong> {{ groomName }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <strong>Email:</strong> {{ email }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <strong>Bride Address:</strong> {{ brideAddress }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <strong>Groom Address:</strong> {{ groomAddress }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <strong>Bride Phone:</strong> {{ bridePhone }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <strong>Groom Phone:</strong> {{ groomPhone }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <strong>Ceremony Location:</strong> {{ ceremonyLocation }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <strong>Ceremony Date:</strong> {{ ceremonyDate }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <strong>Ceremony Time:</strong> {{ ceremonyTime }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <strong>Reception Location:</strong> {{ receptionLocation }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <strong>Reception Date:</strong> {{ receptionDate }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <strong>Reception Time:</strong> {{ receptionTime }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <strong>Dress Color and Style:</strong> {{ dressColorStyle }}
+                        </div>
+                    </div>
+
+                    <h3 class="mt-4">Wedding Party</h3>
+                    <div class="mb-3">
+                        <strong>Bouquets:</strong> {{ bouquets }}
+                    </div>
+                    <div class="mb-3">
+                        <strong>Boutonnieres:</strong> {{ boutonnieres }}
+                    </div>
+                    <div class="mb-3">
+                        <strong>Parents:</strong> {{ parents }}
+                    </div>
+                    <div class="mb-3">
+                        <strong>Corsages:</strong> {{ corsages }}
+                    </div>
+
+                    <h3 class="mt-4">Ceremony</h3>
+                    <div class="mb-3">
+                        <strong>Ceremony Decorations:</strong> {{ ceremonyDecor }}
+                    </div>
+
+                    <h3 class="mt-4">Reception</h3>
+                    <div class="mb-3">
+                        <strong>Reception Decorations:</strong> {{ receptionDecor }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .bg-cream {
+        background-color: #fffaf0;
+    }
+    .btn-gold {
+        background-color: #d4af37;
+        color: white;
+    }
+    .btn-gold:hover {
+        background-color: #c09d31;
+        color: white;
+    }
+</style>
+{% endblock %}
